@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html layout:decorate="~{app/layout}" th:with="title=#{search_w(${query})}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org/">
+<!--/*@thymesVar id="query" type="java.lang.String"*/-->
+<head>
+    <title>
+        <th:block th:text="#{search_w(${query})}"><!--title--></th:block>
+    </title>
+</head>
+<body>
+<!--/*@thymesVar id="results" type="java.util.List<gargoyle.heartsong.model.app.SearchResult>"*/-->
+<th:block layout:fragment="content">
+    <th:block th:each="result:${results}" th:unless="${results.isEmpty()}">
+        <ul class="list-group">
+            <!--/*@thymesVar id="band" type="gargoyle.heartsong.model.app.Band"*/-->
+            <li class="list-group-item" th:if="${result.type eq T(gargoyle.heartsong.model.app.Band)}">
+                <div class="media" th:with="band=${result.item}">
+                    <th:block th:text="#{band}"><!--type--></th:block>
+                    :
+                    <img alt="#" src="#"
+                         th:height="${band.thumbnailHeight}"
+                         th:if="${band.thumbnailPath}"
+                         th:src="@{/media/thumbnail/band/{bandId}(bandId=${band.id})}"
+                         th:type="${band.thumbnailType}"
+                         th:width="${band.thumbnailWidth}"/>
+                    <div class="media-body">
+                        <a href="#" th:href="${result.link}">
+                            <th:block th:text="${band.title}"><!--title--></th:block>
+                        </a>
+                    </div>
+                </div>
+            </li>
+            <!--/*@thymesVar id="album" type="gargoyle.heartsong.model.app.Album"*/-->
+            <li class="list-group-item" th:if="${result.type eq T(gargoyle.heartsong.model.app.Album)}">
+                <div class="media" th:with="album=${result.item}">
+                    <th:block th:text="#{album}"><!--type--></th:block>
+                    :
+                    <img alt="#" src="#"
+                         th:height="${album.thumbnailHeight}"
+                         th:if="${album.thumbnailPath}"
+                         th:src="@{/media/thumbnail/album/{albumId}(albumId=${album.id})}"
+                         th:type="${album.thumbnailType}"
+                         th:width="${album.thumbnailWidth}"/>
+                    <div class="media-body">
+                        <a href="#"
+                           th:href="${result.link}">
+                            <th:block th:text="${album.title}"><!--title--></th:block>
+                            <small th:if="${album.year}">
+                                (
+                                <th:block th:text="${album.year}"><!--year--></th:block>
+                                )
+                            </small>
+                        </a>
+                    </div>
+                </div>
+            </li>
+            <!--/*@thymesVar id="track" type="gargoyle.heartsong.model.app.Track"*/-->
+            <li class="list-group-item" th:if="${result.type eq T(gargoyle.heartsong.model.app.Track)}">
+                <div class="media" th:with="track=${result.item}">
+                    <th:block th:text="#{track}"><!--type--></th:block>
+                    :
+                    <div class="media-body">
+                        <a href="#" th:href="${result.link}">
+                            <th:block th:text="${track.trackNumber}"><!--number--></th:block>
+                            .
+                            <th:block th:text="${track.title}"><!--track--></th:block>
+                        </a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </th:block>
+    <th:block th:if="${results.isEmpty()}">
+        <h2 class="text-warning">
+            <th:block th:text="#{no_result}"><!--empty--></th:block>
+        </h2>
+    </th:block>
+</th:block>
+</body>
+</html>

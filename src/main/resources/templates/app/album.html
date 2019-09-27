@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{app/layout}"
+      th:with="title=#{album_w_w(${album.title},${band.title})}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org/">
+<!--/*@thymesVar id="band" type="gargoyle.heartsong.model.app.Band"*/-->
+<!--/*@thymesVar id="album" type="gargoyle.heartsong.model.app.Album"*/-->
+<!--/*@thymesVar id="tracks" type="java.util.List<gargoyle.heartsong.model.app.Track>"*/-->
+<head>
+    <title>
+        <th:block th:text="#{album_w_w(${album.title},${band.title})}"><!--title--></th:block>
+    </title>
+</head>
+<body>
+<th:block layout:fragment="topbottom">
+    <div class="breadcrumb">
+        <div class="breadcrumb-item">
+            <a href="#" th:href="@{/{letter}(letter=${band.letter.chr})}">
+                <th:block th:text="${band.letter.chr}"><!--letter--></th:block>
+            </a>
+        </div>
+        <div class="breadcrumb-item">
+            <a href="#" th:href="@{/{letter}/{bandAlias}(letter=${band.letter.chr},bandAlias=${band.alias})}">
+                <th:block th:text="${band.title}"><!--band--></th:block>
+            </a>
+        </div>
+        <div class="breadcrumb-item">
+            <span>
+                <th:block th:text="${album.title}"><!--band--></th:block>
+            </span>
+        </div>
+    </div>
+</th:block>
+<th:block layout:fragment="content">
+    <div class="card">
+        <img alt="#" class="card-img-top" src="#" th:if="${album.imagePath}"
+             th:height="${album.imageHeight}"
+             th:src="@{/media/image/album/{albumId}(albumId=${album.id})}"
+             th:type="${album.imageType}"
+             th:width="${album.imageWidth}">
+        <div class="card-header">
+            <h5 class="card-title">
+                <th:block th:text="${album.title}"><!--title--></th:block>
+                <small th:if="${album.year}">
+                    (
+                    <th:block th:text="${album.year}"><!--year--></th:block>
+                    )
+                </small>
+            </h5>
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <th:block th:each="track:${tracks}">
+                    <li class="list-group-item">
+                        <a class="card-link" href="#" th:href="${'#'+track.alias}">
+                            <th:block th:text="${track.trackNumber}"><!--number--></th:block>
+                            .
+                            <th:block th:text="${track.title}"><!--track--></th:block>
+                        </a>
+                        <audio th:if="${track.audioPath}">
+                            <source src="#"
+                                    th:src="@{/media/audio/track/{trackId}(trackId=${track.id})}"
+                                    th:type="${track.audioType}"
+                            />
+                        </audio>
+                    </li>
+                </th:block>
+            </ul>
+            <p class="card-text" th:utext="${album.content}"></p>
+            <hr/>
+            <th:block th:each="track:${tracks}">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <a name="#" th:name="${track.alias}">
+                            <th:block th:text="${track.trackNumber}"><!--track--></th:block>
+                            .
+                            <th:block th:text="${track.title}"><!--track--></th:block>
+                        </a>
+                        <audio th:if="${track.audioPath}">
+                            <source src="#"
+                                    th:src="@{/media/audio/track/{trackId}(trackId=${track.id})}"
+                                    th:type="${track.audioType}"
+                            />
+                        </audio>
+                        <div th:utext="${track.content}"></div>
+                        <video controls="" th:if="${track.videoPath}">
+                            <source src="#"
+                                    th:src="@{/media/video/track/{trackId}(trackId=${track.id})}"
+                                    th:type="${track.videoType}"
+                            />
+                        </video>
+                    </li>
+                </ul>
+            </th:block>
+        </div>
+    </div>
+</th:block>
+</body>
+</html>

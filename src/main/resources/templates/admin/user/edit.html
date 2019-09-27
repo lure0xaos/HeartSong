@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{admin/layout}"
+      th:with="title=${user.username}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org/">
+<!--/*@thymesVar id="user" type="org.springframework.security.core.userdetails.UserDetails"*/-->
+<head>
+    <title th:text="${title}"></title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <form action="#" method="post" th:action="@{/admin/user/edit/{username}(username=${username})}" th:object="${user}">
+        <div class="form-group">
+            <label th:text="#{username}"></label>
+            <span class="form-control" th:text="*{username}"></span>
+        </div>
+        <div class="form-check pl-0">
+            <label class="form-check-label">
+                <th:block th:text="#{enabled}"><!--enabled--></th:block>
+                <input aria-label="enabled" class="form-check-label" th:field="*{enabled}" type="checkbox"/>
+            </label>
+        </div>
+        <div class="form-group">
+            <input th:field="*{username}" type="hidden"/>
+            <input th:field="*{password}" type="hidden"/>
+            <input th:field="*{accountNonExpired}" type="hidden"/>
+            <input th:field="*{accountNonLocked}" type="hidden"/>
+            <input th:field="*{credentialsNonExpired}" type="hidden"/>
+            <button class="btn btn-primary" type="submit">
+                <th:block th:text="#{save}"><!--save--></th:block>
+            </button>
+        </div>
+    </form>
+</th:block>
+</body>
+</html>

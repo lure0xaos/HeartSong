@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html class="h-100" lang="en" th:lang="${applicationLanguage}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org/"
+>
+<!--/*@thymesVar id="applicationLanguage" type="java.lang.String"*/-->
+<!--/*@thymesVar id="applicationName" type="java.lang.String"*/-->
+<!--/*@thymesVar id="title" type="java.lang.String"*/-->
+<head>
+    <th:block th:replace="app/fragments::head"><!--head--></th:block>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">
+        <th:block th:text="${applicationName}"><!--applicationName--></th:block>
+    </title>
+    <th:block th:replace="app/fragments::styles"><!--styles--></th:block>
+    <th:block layout:fragment="styles">
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" th:href="@{/css/layout.css}"/>
+    </th:block>
+</head>
+<body class="d-flex flex-column h-100">
+<header layout:fragment="header">
+    <th:block th:replace="app/fragments::header-navbar"><!--navbar--></th:block>
+</header>
+<main class="flex-shrink-0 mt-5 pt-5" role="main">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <th:block layout:fragment="top"><!--top--></th:block>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <th:block layout:fragment="topbottom"><!--top--></th:block>
+            </div>
+        </div>
+        <!--/*@thymesVar id="title" type="java.lang.String"*/-->
+        <h1 class="" th:text="${title}"></h1>
+        <hr/>
+        <div class="row">
+            <div class="col">
+                <th:block th:replace="app/fragments::alerts"><!--alerts--></th:block>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <th:block layout:fragment="content"><!--content--></th:block>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <th:block layout:fragment="topbottom"><!--top--></th:block>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <th:block layout:fragment="bottom"><!--bottom--></th:block>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="footer mt-auto py-3" layout:fragment="footer">
+    <th:block th:replace="app/fragments::footer"><!--footer--></th:block>
+</footer>
+<th:block th:replace="app/fragments::scripts"><!--scripts--></th:block>
+<th:block layout:fragment="scripts">
+    <script th:src="@{/webjars/jquery/jquery.slim.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</th:block>
+</body>
+</html>

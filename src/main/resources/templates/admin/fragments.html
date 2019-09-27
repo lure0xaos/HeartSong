@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org/">
+
+<th:block th:fragment="head">
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+</th:block>
+
+<th:block th:fragment="styles"><!--styles--></th:block>
+
+<th:block th:fragment="scripts"><!--scripts--></th:block>
+
+<th:block th:fragment="alerts">
+    <th:block th:unless="${@alerts.isEmpty()}">
+        <th:block th:each="alert:${@alerts.getAlertsOnce()}">
+            <div th:class="${'alert alert-'+alert.type.cssClass+(alert.dismissible?' alert-dismissible':'')}">
+                <h4 class="alert-heading">
+                    <th:block th:text="${alert.message}"><!--message--></th:block>
+                </h4>
+                <p th:text="${alert.description}" th:unless="${alert.raw}"><!--text--></p>
+                <p th:if="${alert.raw}" th:utext="${alert.description}"><!--html--></p>
+                <button class="close" data-dismiss="alert" th:if="${alert.dismissible}" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </th:block>
+    </th:block>
+</th:block>
+
+<th:block th:fragment="footer">
+    <footer class="footer mt-auto py-3" layout:fragment="footer">
+        <div class="container">
+            <div class="text-muted float-left">
+                <!--/*@thymesVar id="applicationName" type="java.lang.String"*/-->
+                <th:block th:text="${applicationName}">applicationName</th:block>
+                <!--/*@thymesVar id="applicationBuild" type="java.lang.String"*/-->
+                <th:block th:text="${applicationBuild}">applicationBuild</th:block>
+            </div>
+            <div class="text-muted float-right">
+                &copy;
+                <!--/*@thymesVar id="applicationInceptionYear" type="java.lang.String"*/-->
+                <th:block th:text="${applicationInceptionYear}">applicationInceptionYear</th:block>
+
+                <!--/*@thymesVar id="applicationOrganizationName" type="java.lang.String"*/-->
+                <!--/*@thymesVar id="applicationOrganizationUrl" type="java.lang.String"*/-->
+                <a href="#" target="_blank" th:href="${applicationOrganizationUrl}"
+                   th:text="${applicationOrganizationName}">applicationOrganizationName:applicationOrganizationUrl</a>
+            </div>
+        </div>
+    </footer>
+</th:block>
+
+<th:block th:fragment="header-navbar">
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+        <!--/*@thymesVar id="applicationName" type="java.lang.String"*/-->
+        <a class="navbar-brand" href="#" th:href="@{/}" th:text="${applicationName}">application</a>
+        <div class="navbar-nav col-9"></div>
+        <!--/*@thymesVar id="query" type="java.lang.String"*/-->
+        <div class="navbar-nav">
+            <form action="#" class="form-inline" method="post" th:action="@{/admin/search}">
+                <input aria-label="Search" class="form-control form-control-dark w-100" th:placeholder="#{search}"
+                       th:value="${query}" type="text">
+            </form>
+        </div>
+        <ul class="navbar-nav mr-3">
+            <li class="nav-item text-nowrap">
+                <form action="#" class="form-inline" method="post" th:action="@{/logout}">
+                    <button class="btn nav-link" th:text="#{logout}" type="submit">Sign out</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+
+</th:block>
+
+<!--<th:block th:fragment=""></th:block>-->
+
+</html>

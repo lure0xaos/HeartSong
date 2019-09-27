@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{app/layout}"
+      th:with="title=#{band_w(${band.title})}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org/">
+<!--/*@thymesVar id="band" type="gargoyle.heartsong.model.app.Band"*/-->
+<!--/*@thymesVar id="albums" type="java.util.List<gargoyle.heartsong.model.app.Album>"*/-->
+<head>
+    <title>
+        <th:block th:text="#{band_w(${band.title})}"><!--title--></th:block>
+    </title>
+</head>
+<body>
+<th:block layout:fragment="topbottom">
+    <div class="breadcrumb">
+        <div class="breadcrumb-item">
+            <a href="#" th:href="@{/{letter}(letter=${band.letter.chr})}">
+                <th:block th:text="${band.letter.chr}"><!--letter--></th:block>
+            </a>
+        </div>
+        <div class="breadcrumb-item">
+            <span>
+                <th:block th:text="${band.title}"><!--band--></th:block>
+            </span>
+        </div>
+    </div>
+</th:block>
+<th:block layout:fragment="content">
+    <div class="card">
+        <img alt="#" class="card-img-top" src="#"
+             th:height="${band.imageHeight}"
+             th:if="${band.imagePath}"
+             th:src="@{/media/image/band/{bandId}(bandId=${band.id})}"
+             th:type="${band.imageType}"
+             th:width="${band.imageWidth}">
+        <div class="card-header">
+            <h5 class="card-title">
+                <th:block th:text="${band.title}"><!--title--></th:block>
+            </h5>
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <th:block th:each="album:${albums}">
+                    <li class="list-group-item">
+                        <div class="media">
+                            <img alt="#" src="#"
+                                 th:height="${album.thumbnailHeight}"
+                                 th:if="${album.thumbnailPath}"
+                                 th:src="@{/media/thumbnail/album/{albumId}(albumId=${album.id})}"
+                                 th:type="${album.thumbnailType}"
+                                 th:width="${album.thumbnailWidth}"/>
+                            <div class="media-body">
+                                <a class="card-link" href="#"
+                                   th:href="@{/{letter}/{bandAlias}/{albumAlias}(letter=${band.letter.chr},bandAlias=${band.alias},albumAlias=${album.alias})}">
+                                    <th:block th:text="${album.title}"><!--title--></th:block>
+                                    <small th:if="${album.year}">
+                                        (
+                                        <th:block th:text="${album.year}"><!--year--></th:block>
+                                        )
+                                    </small>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </th:block>
+            </ul>
+            <p class="card-text" th:utext="${band.content}"></p>
+        </div>
+    </div>
+</th:block>
+</body>
+</html>

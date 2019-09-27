@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{admin/layout}"
+      th:with="title=#{track_w_w_w(${track.title},${album.title},${track.title})}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org/">
+<!--/*@thymesVar id="band" type="gargoyle.heartsong.model.app.Band"*/-->
+<!--/*@thymesVar id="album" type="gargoyle.heartsong.model.app.Album"*/-->
+<!--/*@thymesVar id="track" type="gargoyle.heartsong.model.app.Track"*/-->
+<head>
+    <title th:text="${title}"></title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <form action="#" enctype="multipart/form-data" method="post"
+          th:action="@{/admin/track/{albumId}/edit/{trackId}(albumId=${album.id},trackId=${track.id})}"
+          th:object="${track}">
+        <div class="form-group">
+            <label th:text="#{title}"></label>
+            <input aria-label="title" class="form-control" th:field="*{title}" type="text"/>
+        </div>
+        <div class="form-group">
+            <label th:text="#{lyrics}"></label>
+            <textarea aria-label="description" class="form-control" th:field="*{source}"></textarea>
+        </div>
+        <div class="form-group">
+            <label>
+                <audio th:if="${track.audioPath}">
+                    <source src="#"
+                            th:src="@{/media/audio/track/{trackId}(trackId=${track.id})}"
+                            th:type="${track.audioType}"
+                    />
+                </audio>
+                <th:block th:text="#{image}"><!--image--></th:block>
+            </label>
+            <input accept="audio/*" aria-label="audio" class="form-control-file" name="audio" type="file"/>
+        </div>
+        <div class="form-group">
+            <label>
+                <video controls="" th:if="${track.videoPath}">
+                    <source src="#"
+                            th:src="@{/media/video/track/{trackId}(trackId=${track.id})}"
+                            th:type="${track.videoType}"
+                    />
+                </video>
+                <th:block th:text="#{image}"><!--image--></th:block>
+            </label>
+            <input accept="video/*" aria-label="video" class="form-control-file" name="video" type="file"/>
+        </div>
+        <div class="form-group">
+            <input th:field="*{uid}" type="hidden"/>
+            <input th:field="*{id}" type="hidden"/>
+            <input th:field="*{audioPath}" type="hidden"/>
+            <input th:field="*{audioType}" type="hidden"/>
+            <input th:field="*{audioBitrate}" type="hidden"/>
+            <input th:field="*{audioLength}" type="hidden"/>
+            <input th:field="*{audioContentLength}" type="hidden"/>
+            <input th:field="*{videoPath}" type="hidden"/>
+            <input th:field="*{videoType}" type="hidden"/>
+            <input th:field="*{videoWidth}" type="hidden"/>
+            <input th:field="*{videoHeight}" type="hidden"/>
+            <input th:field="*{videoLength}" type="hidden"/>
+            <input th:field="*{videoContentLength}" type="hidden"/>
+            <button class="btn btn-primary" type="submit">
+                <th:block th:text="#{save}"><!--save--></th:block>
+            </button>
+        </div>
+    </form>
+</th:block>
+</body>
+</html>

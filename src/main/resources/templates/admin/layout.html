@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html class="h-100" lang="en" th:lang="${applicationLanguage}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org/"
+>
+<!--/*@thymesVar id="applicationLanguage" type="java.lang.String"*/-->
+<!--/*@thymesVar id="applicationName" type="java.lang.String"*/-->
+<!--/*@thymesVar id="title" type="java.lang.String"*/-->
+<head>
+    <th:block th:replace="admin/fragments::head"><!--head--></th:block>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">
+        <th:block th:text="${applicationName}"><!--applicationName--></th:block>
+    </title>
+    <th:block th:replace="admin/fragments::styles"><!--styles--></th:block>
+    <th:block layout:fragment="styles">
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" th:href="@{/css/admin.css}"/>
+    </th:block>
+</head>
+<body class="d-flex flex-column h-100">
+<header layout:fragment="header">
+    <th:block th:replace="admin/fragments::header-navbar"><!--navbar--></th:block>
+</header>
+
+<div class="container-fluid mt-4 pt-4">
+    <div class="row">
+        <div class="col">
+            <th:block th:replace="admin/fragments::alerts"><!--alerts--></th:block>
+        </div>
+    </div>
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <th:block layout:fragment="sidebar">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" th:href="@{/admin/band/}">
+                                <th:block th:text="#{bands}"><!--bands--></th:block>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" th:href="@{/admin/user/}">
+                                <th:block th:text="#{users}"><!--bands--></th:block>
+                            </a>
+                        </li>
+                    </ul>
+                </th:block>
+
+                <th:block layout:fragment="sidebar-2">
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span></span>
+                        <a class="d-flex align-items-center text-muted" href="#"></a>
+                    </h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"></a>
+                        </li>
+                    </ul>
+                </th:block>
+            </div>
+        </nav>
+
+        <main class="col-md-9 ml-sm-auto col-lg-10 px-4" role="main">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h2 class="h2" th:text="${title}">title</h2>
+                <th:block layout:fragment="buttons">
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group mr-2">
+                            <button class="btn btn-sm btn-outline-secondary" type="button"></button>
+                            <button class="btn btn-sm btn-outline-secondary" type="button"></button>
+                        </div>
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button">
+                        </button>
+                    </div>
+                </th:block>
+            </div>
+
+            <th:block layout:fragment="content"><!--content--></th:block>
+
+        </main>
+    </div>
+</div>
+
+<footer class="footer mt-auto py-3" layout:fragment="footer">
+    <th:block th:replace="admin/fragments::footer"><!--footer--></th:block>
+</footer>
+<th:block th:replace="admin/fragments::scripts"><!--scripts--></th:block>
+<th:block layout:fragment="scripts">
+    <script th:src="@{/webjars/jquery/jquery.slim.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</th:block>
+</body>
+</html>

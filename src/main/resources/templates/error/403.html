@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html class="h-100" lang="en" th:lang="${applicationLanguage}"
+      th:with="title=${status+' '+error}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org/"
+>
+<!--/*@thymesVar id="applicationLanguage" type="java.lang.String"*/-->
+<!--/*@thymesVar id="applicationName" type="java.lang.String"*/-->
+<!--/*@thymesVar id="status" type="java.lang.String"*/-->
+<!--/*@thymesVar id="error" type="java.lang.String"*/-->
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <title>
+        <th:block th:text="${title}"><!--title--></th:block>
+        -
+        <th:block th:text="${applicationName}"><!--applicationName--></th:block>
+    </title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/layout.css}"/>
+</head>
+<body class="d-flex flex-column h-100">
+<header layout:fragment="header">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <!--/*@thymesVar id="applicationName" type="java.lang.String"*/-->
+        <a class="navbar-brand" href="#" th:href="@{/}" th:text="${applicationName}">application</a>
+        <button class="navbar-toggler" data-target="#navbarCollapse"
+                data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+            </ul>
+            <form class="form-inline mt-2 mt-md-0" method="post" th:action="@{/search}">
+                <input class="form-control mr-sm-2" name="query" th:placeholder="#{search}" type="text">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                    <th:block th:text="#{search}">Search</th:block>
+                </button>
+            </form>
+        </div>
+    </nav>
+</header>
+
+
+<main class="flex-shrink-0" role="main">
+    <div class="container">
+        <!--/*@thymesVar id="message" type="java.lang.String"*/-->
+        <!--/*@thymesVar id="exception" type="java.lang.String"*/-->
+        <!--/*@thymesVar id="trace" type="java.lang.String"*/-->
+        <h1 class="mt-5 pt-5" th:text="${title}"></h1>
+        <hr/>
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-danger">
+                    <h2>
+                        <th:block th:text="${error}"><!--error--></th:block>
+                    </h2>
+                    <div>
+                        <a href="#" th:href="@{/}">
+                            <th:block th:text="#{back}">back</th:block>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="footer mt-auto py-3" layout:fragment="footer">
+    <div class="container">
+        <div class="text-muted float-left">
+            <!--/*@thymesVar id="applicationName" type="java.lang.String"*/-->
+            <th:block th:text="${applicationName}">applicationName</th:block>
+            <!--/*@thymesVar id="applicationBuild" type="java.lang.String"*/-->
+            <th:block th:text="${applicationBuild}">applicationBuild</th:block>
+        </div>
+        <div class="text-muted float-right">
+            &copy;
+            <!--/*@thymesVar id="applicationInceptionYear" type="java.lang.String"*/-->
+            <th:block th:text="${applicationInceptionYear}">applicationInceptionYear</th:block>
+
+            <!--/*@thymesVar id="applicationOrganizationName" type="java.lang.String"*/-->
+            <!--/*@thymesVar id="applicationOrganizationUrl" type="java.lang.String"*/-->
+            <a href="#" target="_blank" th:href="${applicationOrganizationUrl}"
+               th:text="${applicationOrganizationName}">applicationOrganizationName:applicationOrganizationUrl</a>
+        </div>
+    </div>
+</footer>
+<script th:src="@{/webjars/jquery/jquery.slim.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>

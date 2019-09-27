@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{admin/layout}"
+      th:with="title=${applicationName}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org/">
+<!--/*@thymesVar id="applicationName" type="java.lang.String"*/-->
+<head>
+    <title th:text="${title}"></title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <!--content-->
+</th:block>
+</body>
+</html>

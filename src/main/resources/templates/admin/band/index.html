@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{admin/layout}"
+      th:with="title=#{bands}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <title th:text="${title}"></title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <a class="btn btn-primary" href="#" th:href="@{/admin/band/create}">
+        <th:block th:text="#{create}"><!--create--></th:block>
+    </a>
+    <ul class="list-group">
+        <!--/*@thymesVar id="bands" type="java.util.List<gargoyle.heartsong.model.app.Band>"*/-->
+        <th:block th:each="band:${bands}">
+            <li class="list-group-item list-group-item-action">
+                <span>
+                    <th:block th:text="${band.title}"><!--title--></th:block>
+                </span>
+                <div class="btn-group float-right">
+                    <a class="btn btn-primary" href="#" th:href="@{/admin/band/edit/{bandId}(bandId=${band.id})}">
+                        <th:block th:text="#{edit}"><!--edit--></th:block>
+                    </a>
+                    <a class="btn btn-secondary" href="#" th:href="@{/admin/album/{bandId}/(bandId=${band.id})}">
+                        <th:block th:text="#{albums}"><!--albums--></th:block>
+                    </a>
+                    <form action="#" method="post" th:action="@{/admin/band/delete/{bandId}(bandId=${band.id})}">
+                        <button class="btn btn-danger">
+                            <th:block th:text="#{delete}"><!--delete--></th:block>
+                        </button>
+                    </form>
+                </div>
+            </li>
+        </th:block>
+    </ul>
+</th:block>
+</body>
+</html>

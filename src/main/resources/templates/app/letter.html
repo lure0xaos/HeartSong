@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{app/layout}"
+      th:with="title=#{bands_w(${letter})}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org/">
+<!--/*@thymesVar id="letter" type="java.lang.String"*/-->
+<!--/*@thymesVar id="band" type="gargoyle.heartsong.model.app.Band"*/-->
+<head>
+    <title>
+        <th:block th:text="#{bands_w(${letter})}"><!--title--></th:block>
+    </title>
+</head>
+<body>
+<th:block layout:fragment="topbottom">
+    <div class="breadcrumb">
+        <div class="breadcrumb-item">
+            <span>
+                <th:block th:text="${letter}"><!--letter--></th:block>
+            </span>
+        </div>
+    </div>
+</th:block>
+<!--/*@thymesVar id="bands" type="java.util.List<gargoyle.heartsong.model.app.Band>"*/-->
+<th:block layout:fragment="content">
+    <th:block th:each="band:${bands}">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <div class="media">
+                    <img alt="#" src="#"
+                         th:height="${band.thumbnailHeight}"
+                         th:if="${band.thumbnailPath}"
+                         th:src="@{/media/thumbnail/band/{bandId}(bandId=${band.id})}"
+                         th:type="${band.thumbnailType}"
+                         th:width="${band.thumbnailWidth}"/>
+                    <div class="media-body">
+                        <a href="#" th:href="@{/{letter}/{alias}(letter=${band.letter.chr},alias=${band.alias})}">
+                            <th:block th:text="${band.title}"><!--title--></th:block>
+                        </a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </th:block>
+</th:block>
+</body>
+</html>

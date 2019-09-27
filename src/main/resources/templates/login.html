@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{app/layout}"
+      th:with="title=#{login}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <title th:text="${title}"></title>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+    <link media="screen" rel="stylesheet" th:href="@{/css/login.css}"/>
+</head>
+<body>
+
+<th:block layout:fragment="content">
+    <form class="form-login" method="post" th:action="@{/login}">
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <label class="sr-only" for="inputEmail">Email address</label>
+        <input autofocus="autofocus"
+               class="form-control"
+               id="inputEmail"
+               name="username"
+               placeholder="Email address"
+               required="required"
+               type="text"/>
+        <label class="sr-only" for="inputPassword">Password</label>
+        <input class="form-control"
+               id="inputPassword"
+               placeholder="Password"
+               required="required"
+               type="password"/>
+        <div class="checkbox mb-3">
+            <label>
+                <input name="remember-me" type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
+    </form>
+</th:block>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{admin/layout}"
+      th:with="title=#{users}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <title th:text="${title}"></title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <a class="btn btn-primary" href="#" th:href="@{/admin/user/create}">
+        <th:block th:text="#{create}"><!--create--></th:block>
+    </a>
+    <ul class="list-group">
+        <!--/*@thymesVar id="users" type="java.util.List<org.springframework.security.core.userdetails.UserDetails>"*/-->
+        <th:block th:each="user:${users}">
+            <li class="list-group-item list-group-item-action">
+                <span>
+                    <th:block th:text="${user.username}"><!--title--></th:block>
+                </span>
+                <div class="btn-group float-right">
+                    <form action="#"
+                          th:action="@{/admin/user/edit/{username}(username=${user.username})}">
+                        <button class="btn btn-primary">
+                            <th:block th:text="#{edit}"><!--edit--></th:block>
+                        </button>
+                    </form>
+                    <form action="#" method="post"
+                          th:action="@{/admin/user/kick/{username}(username=${user.username})}">
+                        <button class="btn btn-warning">
+                            <th:block th:text="#{kick}"><!--edit--></th:block>
+                        </button>
+                    </form>
+                </div>
+            </li>
+        </th:block>
+    </ul>
+</th:block>
+</body>
+</html>
