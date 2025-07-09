@@ -1,17 +1,17 @@
 package gargoyle.heartsong.eval;
 
 import gargoyle.heartsong.test.HSTest;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.springframework.test.util.AssertionErrors.assertNotNull;
+import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 public class ExpressionEvaluatorTest extends HSTest {
 
     private ExpressionEvaluator evaluator;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         evaluator = new ExpressionEvaluator();
     }
@@ -28,6 +28,7 @@ public class ExpressionEvaluatorTest extends HSTest {
         assertNotNull(expr, evaluator.evaluate(expr, this, String.class));
     }
 
+    @SuppressWarnings("unused")
     public String getTestProperty() {
         return "testProperty";
     }

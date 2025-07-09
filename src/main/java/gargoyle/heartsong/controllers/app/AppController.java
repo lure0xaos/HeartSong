@@ -30,6 +30,7 @@ import java.util.ArrayList;
 @RequiredArgsConstructor
 public class AppController {
     public static final String PATH_ROOT = "/";
+    public static final String PATH_LOGIN = "/login";
     public static final String PARAM_QUERY = "query";
     public static final String PARAM_RESULTS = "results";
     private static final String PATH_LETTER_W = "/{letter:[#A-Za-z]}";
@@ -47,6 +48,7 @@ public class AppController {
     private static final String MODEL_TRACKS = "tracks";
     private static final String MODEL_QUERY = "query";
     private static final String MODEL_RESULTS = "model";
+    private static final String VIEW_LOGIN = "login";
     private static final String VIEW_APP_INDEX = "app/index";
     private static final String VIEW_APP_LETTER = "app/letter";
     private static final String VIEW_APP_BAND = "app/band";
@@ -58,6 +60,7 @@ public class AppController {
     private static final String MAPPING_SEARCH = "search";
     private static final String MAPPING_LETTER = "letter";
     private static final String MAPPING_INDEX = "index";
+    public static final String MAPPING_LOGIN = "login";
     private static final String MAPPING_BAND = "band";
     private static final String MAPPING_ALBUM = "album";
 
@@ -128,6 +131,11 @@ public class AppController {
                             @ModelAttribute(PARAM_RESULTS) ArrayList<SearchResult<?>> results,
                             RedirectAttributes redirect) {
         return new ModelAndView(VIEW_APP_SEARCH, Maps.of(MODEL_QUERY, query, MODEL_RESULTS, results));
+    }
+
+    @GetMapping(name = MAPPING_LOGIN, value = PATH_LOGIN)
+    public ModelAndView getLogin() {
+        return new ModelAndView(VIEW_LOGIN);
     }
 
 }

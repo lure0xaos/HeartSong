@@ -48,17 +48,17 @@ public class UserDao extends BaseDao<UserDetails, String> {
 
     @Override
     public List<UserDetails> findAll() {
-        return queryList("select * from USERS order by USERNAME", Maps.of());
+        return queryList("select * from \"USERS\" order by \"USERNAME\"", Maps.of());
     }
 
     @Override
     public long countAll() {
-        Optional<Long> count = queryObject("select count(USERNAME) from USERS", Maps.of(), Long.class);
+        Optional<Long> count = queryObject("select count(\"USERNAME\") from \"USERS\"", Maps.of(), Long.class);
         return count.orElse(0L);
     }
 
     public Optional<UserDetails> findByUsername(String username) {
-        return queryItem("select * from USERS where USERNAME = :username limit 1", Maps.of("username", username));
+        return queryItem("select * from \"USERS\" where \"USERNAME\" = :username limit 1", Maps.of("username", username));
     }
 
     @Override
@@ -72,7 +72,7 @@ public class UserDao extends BaseDao<UserDetails, String> {
     }
 
     public boolean existsByUsername(String username) {
-        Optional<Long> count = queryObject("select count(USERNAME) from USERS where USERNAME = :username", Maps.of("username", username), Long.class);
+        Optional<Long> count = queryObject("select count(\"USERNAME\") from \"USERS\" where \"USERNAME\" = :username", Maps.of("username", username), Long.class);
         return !Long.valueOf(0).equals(count.orElse(0L));
     }
 
@@ -83,15 +83,15 @@ public class UserDao extends BaseDao<UserDetails, String> {
 
     @Transactional
     public void changePassword(String username, String newPassword) {
-        queryUpdate("update USERS set PASSWORD=:password where USERNAME=:username", new MapSqlParameterSource(Maps.of("password", passwordEncoder.encode(newPassword), "username", username)));
+        queryUpdate("update \"USERS\" set \"PASSWORD\"=:password where \"USERNAME\"=:username", new MapSqlParameterSource(Maps.of("password", passwordEncoder.encode(newPassword), "username", username)));
     }
 
     @Transactional
     @Override
     public void save(UserDetails model) {
         insertOrUpdate(model,
-                "insert into USERS(USERNAME, PASSWORD, ENABLED) values(:username, :password, :enabled)",
-                "update USERS set USERNAME=:username, PASSWORD=:password, ENABLED=:enabled where USERNAME=:username");
+                "insert into \"USERS\"(\"USERNAME\", \"PASSWORD\", \"ENABLED\") values(:username, :password, :enabled)",
+                "update \"USERS\" set \"USERNAME\"=:username, \"PASSWORD\"=:password, \"ENABLED\"=:enabled where \"USERNAME\"=:username");
     }
 
     @Override
@@ -110,13 +110,13 @@ public class UserDao extends BaseDao<UserDetails, String> {
 
     @Override
     public void delete(String id) {
-        delete("delete from USERS where username=:id", id);
+        delete("delete from \"USERS\" where \"USERNAME\"=:id", id);
     }
 
     @Override
     public List<SearchResult<UserDetails>> search(String query, Function<UserDetails, String> linker) {
         return Maps.map(
-                queryList("select * from USERS where upper(USERNAME) like :query order by USERNAME",
+                queryList("select * from \"USERS\" where upper(\"USERNAME\") like :query order by \"USERNAME\"",
                         Maps.of("query", '%' + query.toUpperCase(LocaleContextHolder.getLocale()) + '%')),
                 item -> new SearchResult<>(item, modelType, item.getUsername(), linker.apply(item)));
     }

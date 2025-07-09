@@ -5,13 +5,13 @@ import gargoyle.heartsong.model.app.Album;
 import gargoyle.heartsong.model.app.Band;
 import gargoyle.heartsong.model.app.Track;
 import gargoyle.heartsong.util.Images;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.PostConstruct;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.file.Files;

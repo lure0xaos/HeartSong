@@ -1,5 +1,8 @@
 package gargoyle.heartsong.model.alerts;
 
+import lombok.Getter;
+
+@Getter
 public enum AlertType {
     NONE(""),
     ERROR("danger"),
@@ -13,7 +16,4 @@ public enum AlertType {
         this.cssClass = cssClass;
     }
 
-    public String getCssClass() {
-        return cssClass;
-    }
 }

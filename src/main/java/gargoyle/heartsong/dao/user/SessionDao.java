@@ -8,7 +8,6 @@ import gargoyle.heartsong.util.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.session.MapSession;
 import org.springframework.session.Session;
 import org.springframework.stereotype.Service;
@@ -22,11 +21,9 @@ import java.util.function.Function;
 @Slf4j
 public class SessionDao extends BaseDao<Session, String> {
     public static final String PRINCIPAL_NAME = "PRINCIPAL_NAME";
-    private final PasswordEncoder passwordEncoder;
 
-    public SessionDao(NamedParameterJdbcTemplate jdbcTemplate, PasswordEncoder passwordEncoder) {
+    public SessionDao(NamedParameterJdbcTemplate jdbcTemplate) {
         super(Session.class, String.class, jdbcTemplate, SessionSqlParameterSource::new, new SessionRowMapper());
-        this.passwordEncoder = passwordEncoder;
     }
 
     public Session create(String username) {

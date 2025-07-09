@@ -3,12 +3,13 @@ package gargoyle.heartsong.services;
 import gargoyle.heartsong.model.app.SearchResult;
 import gargoyle.heartsong.test.HSTest;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-import static org.junit.Assert.assertNotNull;
+import static org.springframework.test.util.AssertionErrors.assertNotNull;
+
 
 @Slf4j
 public class SearchTest extends HSTest {

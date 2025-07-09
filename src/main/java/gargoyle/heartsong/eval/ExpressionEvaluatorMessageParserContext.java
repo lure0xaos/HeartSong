@@ -1,6 +1,7 @@
 package gargoyle.heartsong.eval;
 
 import org.springframework.expression.ParserContext;
+import org.springframework.lang.NonNull;
 
 public class ExpressionEvaluatorMessageParserContext implements ParserContext {
     public static final String EXPRESSION_PREFIX = "#{";
@@ -11,11 +12,13 @@ public class ExpressionEvaluatorMessageParserContext implements ParserContext {
         return false;
     }
 
+    @NonNull
     @Override
     public String getExpressionPrefix() {
         return EXPRESSION_PREFIX;
     }
 
+    @NonNull
     @Override
     public String getExpressionSuffix() {
         return EXPRESSION_SUFFIX;

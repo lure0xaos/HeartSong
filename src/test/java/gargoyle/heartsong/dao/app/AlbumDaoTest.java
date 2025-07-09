@@ -1,29 +1,29 @@
 package gargoyle.heartsong.dao.app;
 
-import com.mchange.util.AssertException;
 import gargoyle.heartsong.model.app.Album;
 import gargoyle.heartsong.model.app.Band;
 import gargoyle.heartsong.model.app.Letter;
 import gargoyle.heartsong.model.app.SearchResult;
 import gargoyle.heartsong.test.HSTest;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.springframework.test.util.AssertionErrors.assertEquals;
+import static org.springframework.test.util.AssertionErrors.assertFalse;
+import static org.springframework.test.util.AssertionErrors.assertNotEquals;
+import static org.springframework.test.util.AssertionErrors.assertNotNull;
+import static org.springframework.test.util.AssertionErrors.assertTrue;
 
-@RunWith(SpringRunner.class)
+
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 @ActiveProfiles("test")
 public class AlbumDaoTest extends HSTest {
@@ -34,7 +34,7 @@ public class AlbumDaoTest extends HSTest {
 
     private Band band;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         band = Band.builder()
                 .title("band title")
@@ -66,13 +66,13 @@ public class AlbumDaoTest extends HSTest {
     public void findById() {
         Album album = albumDao.findAll().get(0);
         Long id = album.getId();
-        assertEquals("findById", albumDao.findById(id).orElseThrow(() -> new AssertException("not saved")), album);
+        assertEquals("findById", albumDao.findById(id).orElseThrow(() -> new AssertionError("not saved")), album);
     }
 
     @Test
     public void findByAlias() {
         Album album = albumDao.findAll().get(0);
-        Band band = bandDao.findById(album.getBandId()).orElse(null);
+        Band band = bandDao.findById(album.getBandId()).orElseThrow();
         String bandAlias = band.getAlias();
         String albumAlias = album.getAlias();
         assertEquals("findByAlias", albumDao.findByAlias(albumAlias, bandAlias).orElse(null), album);
@@ -119,7 +119,7 @@ public class AlbumDaoTest extends HSTest {
     public void search() {
         List<SearchResult<Album>> resultList = albumDao.search("album", (album -> ""));
         for (SearchResult<Album> albumSearchResult : resultList) {
-            assertSame("search", Album.class, albumSearchResult.getType());
+            assertSame(Album.class, albumSearchResult.getType(), "search");
         }
     }
 }

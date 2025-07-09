@@ -35,6 +35,7 @@ public class AlertExceptionAspect {
             MethodSignature signature = (MethodSignature) pjp.getSignature();
             AlertSuccess success = annotation.success();
             AlertFailure failure = annotation.failure();
+            //noinspection unchecked
             return exceptionAlertService.proceed((Callable<?>) () -> {
                         try {
                             return pjp.proceed();

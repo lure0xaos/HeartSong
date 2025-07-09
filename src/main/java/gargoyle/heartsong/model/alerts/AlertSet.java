@@ -2,6 +2,7 @@ package gargoyle.heartsong.model.alerts;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.lang.NonNull;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -37,6 +38,7 @@ public class AlertSet implements Iterable<Alert> {
         return set.isEmpty();
     }
 
+    @NonNull
     public Iterator<Alert> iterator() {
         return set.iterator();
     }

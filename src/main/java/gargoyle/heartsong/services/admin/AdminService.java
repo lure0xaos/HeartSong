@@ -51,12 +51,11 @@ public class AdminService {
 
     public List<SearchResult<?>> search(String query) {
         List<SearchResult<?>> searchResults = new ArrayList<>();
-        searchResults.addAll(bandDao.search(query, (band) -> {
-            return ServletUriComponentsBuilder.fromCurrentContextPath()
-                    .pathSegment(band.getLetter().toString())
-                    .pathSegment(band.getAlias())
-                    .build().toUriString();
-        }));
+        searchResults.addAll(bandDao.search(query, (band) ->
+                ServletUriComponentsBuilder.fromCurrentContextPath()
+                        .pathSegment(band.getLetter().toString())
+                        .pathSegment(band.getAlias())
+                        .build().toUriString()));
         searchResults.addAll(albumDao.search(query, (album) -> {
             Band band = bandDao.findById(album.getBandId()).orElseThrow(() -> new ItemNotFoundException("band", album.getBandId()));
             return ServletUriComponentsBuilder.fromCurrentContextPath()

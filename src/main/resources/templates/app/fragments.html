@@ -69,7 +69,7 @@
 </th:block>
 
 <th:block th:fragment="navbar-letters">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav me-auto">
         <!--/*@thymesVar id="countByLetter" type="java.util.Map<gargoyle.heartsong.model.app.Letter, java.lang.Integer>"*/-->
         <th:block th:each="entry:${countByLetter}">
             <li class="nav-item">
@@ -87,9 +87,9 @@
 </th:block>
 
 <th:block th:fragment="navbar-search">
-    <form class="form-inline mt-2 mt-md-0" method="post" th:action="@{/search}">
+    <form class="d-flex mt-2 mt-md-0" method="post" th:action="@{/search}">
         <!--/*@thymesVar id="query" type="java.lang.String"*/-->
-        <input aria-label="" class="form-control mr-sm-2" name="query" th:placeholder="#{search}"
+        <input aria-label="" class="form-control me-sm-2" name="query" th:placeholder="#{search}"
                th:value="${query}" type="text">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
             <th:block th:text="#{search}">Search</th:block>

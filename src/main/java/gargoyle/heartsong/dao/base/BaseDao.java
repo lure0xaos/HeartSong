@@ -79,7 +79,7 @@ public abstract class BaseDao<T, ID> implements Dao<T, ID>, Searcher<T> {
         for (int i = 0; i < length; i++) {
             row[i] = rs.getObject(i + 1);
         }
-        return (Object[]) row;
+        return row;
     }
 
     protected void queryUpdate(String sql, SqlParameterSource paramSource) {
@@ -89,7 +89,7 @@ public abstract class BaseDao<T, ID> implements Dao<T, ID>, Searcher<T> {
     protected ID queryInsert(String sql, SqlParameterSource paramSource) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(sql, paramSource, keyHolder);
-        return idType.cast(keyHolder.getKey());
+        return idType.cast(keyHolder.getKeyAs(idType));
     }
 
     protected void queryUpdate(String sql, Map<String, Object> paramSource) {

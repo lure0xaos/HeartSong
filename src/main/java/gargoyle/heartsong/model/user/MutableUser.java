@@ -1,5 +1,6 @@
 package gargoyle.heartsong.model.user;
 
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,10 +16,15 @@ public class MutableUser implements UserDetails {
     private final PasswordEncoder passwordEncoder;
     private final Collection<? extends GrantedAuthority> authorities;
     private String password;
+    @Setter
     private String username;
+    @Setter
     private boolean accountNonExpired;
+    @Setter
     private boolean accountNonLocked;
+    @Setter
     private boolean credentialsNonExpired;
+    @Setter
     private boolean enabled;
 
     public MutableUser(UserDetails user, @Autowired PasswordEncoder passwordEncoder) {
@@ -55,17 +61,9 @@ public class MutableUser implements UserDetails {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     @Override
     public boolean isAccountNonExpired() {
         return accountNonExpired;
-    }
-
-    public void setAccountNonExpired(boolean accountNonExpired) {
-        this.accountNonExpired = accountNonExpired;
     }
 
     @Override
@@ -73,17 +71,9 @@ public class MutableUser implements UserDetails {
         return accountNonLocked;
     }
 
-    public void setAccountNonLocked(boolean accountNonLocked) {
-        this.accountNonLocked = accountNonLocked;
-    }
-
     @Override
     public boolean isCredentialsNonExpired() {
         return credentialsNonExpired;
-    }
-
-    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-        this.credentialsNonExpired = credentialsNonExpired;
     }
 
     @Override
@@ -91,7 +81,4 @@ public class MutableUser implements UserDetails {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
 }

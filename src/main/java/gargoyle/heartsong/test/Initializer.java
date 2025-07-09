@@ -1,5 +1,6 @@
 package gargoyle.heartsong.test;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,7 @@ import javax.sql.DataSource;
 public class Initializer {
     private final DataSource dataSource;
 
-    //    @PostConstruct
+    @PostConstruct
     public void initialize() {
         HSTestUtil.prepareData(dataSource);
     }

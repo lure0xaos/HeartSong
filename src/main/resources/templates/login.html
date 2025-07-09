@@ -12,28 +12,37 @@
 
 <th:block layout:fragment="content">
     <form class="form-login" method="post" th:action="@{/login}">
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label class="sr-only" for="inputEmail">Email address</label>
+        <h1 class="h3 mb-3 font-weight-normal" th:text="#{login-header}">Please sign in</h1>
+        <div th:if="${param.failed}" class="alert alert-danger" th:text="#{login-error}">
+            Invalid username or password!
+        </div>
+        <label class="sr-only" for="inputEmail" th:text="#{username}">Email address</label>
         <input autofocus="autofocus"
+               autocomplete="username"
                class="form-control"
                id="inputEmail"
                name="username"
-               placeholder="Email address"
+               th:placeholder="#{username}"
                required="required"
                type="text"/>
-        <label class="sr-only" for="inputPassword">Password</label>
-        <input class="form-control"
+        <label class="sr-only" for="inputPassword" th:text="#{password}">Password</label>
+        <input autocomplete="current-password"
+               class="form-control"
                id="inputPassword"
-               placeholder="Password"
+               name="password"
+               th:placeholder="#{password}"
                required="required"
                type="password"/>
         <div class="checkbox mb-3">
             <label>
-                <input name="remember-me" type="checkbox" value="remember-me"> Remember me
+                <input name="remember-me" type="checkbox" value="remember-me"/>
+                <th:block th:text="#{remember-me}">Remember me</th:block>
             </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{sign-in}">Sign in</button>
+        <p class="mt-5 mb-3 text-muted">&copy;
+            <th:block th:text="#{copyright}">2017-2019</th:block>
+        </p>
     </form>
 </th:block>
 </body>

@@ -1,7 +1,10 @@
 package gargoyle.heartsong.model.app;
 
+import lombok.Getter;
+
 import java.util.Arrays;
 
+@Getter
 public enum Letter {
     OTHER('#'),
     A('A'),
@@ -52,7 +55,4 @@ public enum Letter {
                 .orElse(OTHER);
     }
 
-    public char getChr() {
-        return chr;
-    }
 }

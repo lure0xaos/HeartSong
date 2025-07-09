@@ -6,6 +6,7 @@ import org.springframework.expression.spel.SpelParserConfiguration;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 
 public class ExpressionEvaluator {
+    @SuppressWarnings("FieldCanBeLocal")
     private final SpelParserConfiguration configuration;
     private final ExpressionParser expressionParser;
     private final ParserContext context;

@@ -42,8 +42,8 @@ public final class HSTestUtil {
             for (Letter bandLetter : letters) {
                 String bandType = Band.class.getSimpleName();
                 String bandTitle = title(bandLetter, bandType, "");
-                String bandDescription = description(bandLetter, bandType);
-                Band band = Band.builder().title(bandTitle).source(bandDescription).build();
+                String BandDescription = description(bandLetter, bandType);
+                Band band = Band.builder().title(bandTitle).source(BandDescription).build();
                 bandDao.save(band);
                 for (Letter albumLetter : letters) {
                     String albumType = Album.class.getSimpleName();

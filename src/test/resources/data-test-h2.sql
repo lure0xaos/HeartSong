@@ -11,22 +11,22 @@ insert into PUBLIC.BANDS (ID, UID, ALIAS, TITLE, SOURCE, CONTENT, LETTER, GENRE,
                           IMAGE_WIDTH, IMAGE_HEIGHT, IMAGE_PATH, THUMBNAIL_TYPE, THUMBNAIL_CONTENT_LENGTH,
                           THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT, THUMBNAIL_PATH)
 values (1, '81eda4e7-fa4d-4f26-9ef1-55b8ac66f50c', 'A Band', 'A Band',
-        'A Banddescription description description description description description description description description description description description description description description description description description description description description description description description description',
-        '<p>A Banddescription description description description description description description description description description description description description description description description description description description description description description description description description</p> ',
+        'A Band description description description description description description description description description description description description description description description description description description description description description description description description description',
+        '<p>A Band description description description description description description description description description description description description description description description description description description description description description description description description description</p> ',
         'A', null, 'application/octet-stream', 0, 0, 0, null, 'application/octet-stream', '0', 0, 0, null);
 insert into PUBLIC.BANDS (ID, UID, ALIAS, TITLE, SOURCE, CONTENT, LETTER, GENRE, IMAGE_TYPE, IMAGE_CONTENT_LENGTH,
                           IMAGE_WIDTH, IMAGE_HEIGHT, IMAGE_PATH, THUMBNAIL_TYPE, THUMBNAIL_CONTENT_LENGTH,
                           THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT, THUMBNAIL_PATH)
 values (2, '0f626ea6-83df-43a0-b2b6-e7c09766824a', 'B Band', 'B Band',
-        'B Banddescription description description description description description description description description description description description description description description description description description description description description description description description description',
-        '<p>B Banddescription description description description description description description description description description description description description description description description description description description description description description description description description</p> ',
+        'B Band description description description description description description description description description description description description description description description description description description description description description description description description description',
+        '<p>B Band description description description description description description description description description description description description description description description description description description description description description description description description description</p> ',
         'B', null, 'application/octet-stream', 0, 0, 0, null, 'application/octet-stream', '0', 0, 0, null);
 insert into PUBLIC.BANDS (ID, UID, ALIAS, TITLE, SOURCE, CONTENT, LETTER, GENRE, IMAGE_TYPE, IMAGE_CONTENT_LENGTH,
                           IMAGE_WIDTH, IMAGE_HEIGHT, IMAGE_PATH, THUMBNAIL_TYPE, THUMBNAIL_CONTENT_LENGTH,
                           THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT, THUMBNAIL_PATH)
 values (3, 'f47be83b-85f8-4773-8587-8b951cf37def', 'C Band', 'C Band',
-        'C Banddescription description description description description description description description description description description description description description description description description description description description description description description description description',
-        '<p>C Banddescription description description description description description description description description description description description description description description description description description description description description description description description description</p> ',
+        'C Band description description description description description description description description description description description description description description description description description description description description description description description description description',
+        '<p>C Band description description description description description description description description description description description description description description description description description description description description description description description description description</p> ',
         'C', null, 'application/octet-stream', 0, 0, 0, null, 'application/octet-stream', '0', 0, 0, null);
 insert into PUBLIC.ALBUMS (ID, UID, ALIAS, TITLE, SOURCE, CONTENT, YEAR, IMAGE_TYPE, IMAGE_CONTENT_LENGTH, IMAGE_WIDTH,
                            IMAGE_HEIGHT, IMAGE_PATH, THUMBNAIL_TYPE, THUMBNAIL_CONTENT_LENGTH, THUMBNAIL_WIDTH,

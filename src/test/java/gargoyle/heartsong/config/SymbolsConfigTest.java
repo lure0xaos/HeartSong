@@ -1,10 +1,11 @@
 package gargoyle.heartsong.config;
 
 import gargoyle.heartsong.test.HSTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 
 public class SymbolsConfigTest extends HSTest {
     @Autowired
@@ -12,36 +13,36 @@ public class SymbolsConfigTest extends HSTest {
 
     @Test
     public void getApplicationBuild() {
-        assertNotNull("getApplicationBuild", config.getApplicationBuild());
+        assertNotNull(config.getApplicationBuild(), "getApplicationBuild");
     }
 
     @Test
     public void getApplicationCharset() {
-        assertNotNull("getApplicationCharset", config.getApplicationCharset());
+        assertNotNull(config.getApplicationCharset(), "getApplicationCharset");
     }
 
     @Test
     public void getApplicationDescription() {
-        assertNotNull("getApplicationDescription", config.getApplicationDescription());
+        assertNotNull(config.getApplicationDescription(), "getApplicationDescription");
     }
 
     @Test
     public void getApplicationInceptionYear() {
-        assertNotNull("getApplicationInceptionYear", config.getApplicationInceptionYear());
+        assertNotNull(config.getApplicationInceptionYear(), "getApplicationInceptionYear");
     }
 
     @Test
     public void getApplicationName() {
-        assertNotNull("getApplicationName", config.getApplicationName());
+        assertNotNull(config.getApplicationName(), "getApplicationName");
     }
 
     @Test
     public void getApplicationOrganizationName() {
-        assertNotNull("getApplicationOrganizationName", config.getApplicationOrganizationName());
+        assertNotNull(config.getApplicationOrganizationName(), "getApplicationOrganizationName");
     }
 
     @Test
     public void getApplicationOrganizationUrl() {
-        assertNotNull("getApplicationOrganizationUrl", config.getApplicationOrganizationUrl());
+        assertNotNull(config.getApplicationOrganizationUrl(), "getApplicationOrganizationUrl");
     }
 }

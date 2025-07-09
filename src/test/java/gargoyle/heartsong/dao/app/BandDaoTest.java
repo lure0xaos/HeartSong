@@ -4,25 +4,26 @@ import gargoyle.heartsong.model.app.Band;
 import gargoyle.heartsong.model.app.Letter;
 import gargoyle.heartsong.model.app.SearchResult;
 import gargoyle.heartsong.test.HSTest;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.springframework.test.util.AssertionErrors.assertEquals;
+import static org.springframework.test.util.AssertionErrors.assertFalse;
+import static org.springframework.test.util.AssertionErrors.assertNotEquals;
+import static org.springframework.test.util.AssertionErrors.assertNotNull;
+import static org.springframework.test.util.AssertionErrors.assertTrue;
 
-@RunWith(SpringRunner.class)
+
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 @ActiveProfiles("test")
 public class BandDaoTest extends HSTest {
@@ -30,7 +31,7 @@ public class BandDaoTest extends HSTest {
     private BandDao bandDao;
 
 
-    @Before
+    @BeforeEach
     public void setUp() {
         for (Letter letter : Letter.values()) {
             bandDao.save(Band.builder()
@@ -117,7 +118,7 @@ public class BandDaoTest extends HSTest {
     public void search() {
         List<SearchResult<Band>> resultList = bandDao.search("band", (band) -> "");
         for (SearchResult<Band> bandSearchResult : resultList) {
-            assertSame("search", Band.class, bandSearchResult.getType());
+            assertSame(Band.class, bandSearchResult.getType(), "search");
         }
     }
 }

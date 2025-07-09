@@ -2,26 +2,27 @@ package gargoyle.heartsong.dao.user;
 
 import gargoyle.heartsong.model.app.SearchResult;
 import gargoyle.heartsong.test.HSTest;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.springframework.test.util.AssertionErrors.assertEquals;
+import static org.springframework.test.util.AssertionErrors.assertFalse;
+import static org.springframework.test.util.AssertionErrors.assertNotEquals;
+import static org.springframework.test.util.AssertionErrors.assertNotNull;
+import static org.springframework.test.util.AssertionErrors.assertTrue;
 
-@RunWith(SpringRunner.class)
+
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 @ActiveProfiles("test")
 public class UserDaoTest extends HSTest {
@@ -31,7 +32,7 @@ public class UserDaoTest extends HSTest {
     private PasswordEncoder passwordEncoder;
 
 
-    @Before
+    @BeforeEach
     public void setUp() {
         userDao.save(userDao.create("user", "password", "USER"));
     }
@@ -79,10 +80,12 @@ public class UserDaoTest extends HSTest {
         String password2 = "password2";
         String username = "userChange";
         UserDetails user = userDao.create(username, password1, "USER");
+        assertNotNull("user not created", user);
         assertTrue("password", passwordEncoder.matches(password1, user.getPassword()));
         userDao.save(user);
         userDao.changePassword(username, password2);
         user = userDao.findByUsername(username).orElse(null);
+        assertNotNull("user not found", user);
         assertTrue("password", passwordEncoder.matches(password2, user.getPassword()));
     }
 
@@ -99,7 +102,7 @@ public class UserDaoTest extends HSTest {
     public void search() {
         List<SearchResult<UserDetails>> resultList = userDao.search("user", (user -> ""));
         for (SearchResult<UserDetails> userSearchResult : resultList) {
-            assertSame("search", UserDetails.class, userSearchResult.getType());
+            assertSame(UserDetails.class, userSearchResult.getType(), "search");
         }
     }
 

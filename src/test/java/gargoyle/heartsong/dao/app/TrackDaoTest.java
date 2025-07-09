@@ -6,24 +6,25 @@ import gargoyle.heartsong.model.app.Letter;
 import gargoyle.heartsong.model.app.SearchResult;
 import gargoyle.heartsong.model.app.Track;
 import gargoyle.heartsong.test.HSTest;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.springframework.test.util.AssertionErrors.assertEquals;
+import static org.springframework.test.util.AssertionErrors.assertFalse;
+import static org.springframework.test.util.AssertionErrors.assertNotEquals;
+import static org.springframework.test.util.AssertionErrors.assertNotNull;
+import static org.springframework.test.util.AssertionErrors.assertTrue;
 
-@RunWith(SpringRunner.class)
+
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 @ActiveProfiles("test")
 public class TrackDaoTest extends HSTest {
@@ -33,12 +34,11 @@ public class TrackDaoTest extends HSTest {
     private AlbumDao albumDao;
     @Autowired
     private BandDao bandDao;
-    private Band band;
     private Album album;
 
-    @Before
+    @BeforeEach
     public void setUp() {
-        band = Band.builder()
+        Band band = Band.builder()
                 .title("band title")
                 .source("band description")
                 .build();
@@ -81,8 +81,8 @@ public class TrackDaoTest extends HSTest {
     @Test
     public void findByAlias() {
         Track track = trackDao.findAll().get(0);
-        Album album = albumDao.findById(track.getAlbumId()).orElse(null);
-        Band band = bandDao.findById(album.getBandId()).orElse(null);
+        Album album = albumDao.findById(track.getAlbumId()).orElseThrow();
+        Band band = bandDao.findById(album.getBandId()).orElseThrow();
         String bandAlias = band.getAlias();
         String albumAlias = album.getAlias();
         String trackAlias = album.getAlias();
@@ -130,7 +130,7 @@ public class TrackDaoTest extends HSTest {
     public void search() {
         List<SearchResult<Track>> resultList = trackDao.search("track", (track) -> "");
         for (SearchResult<Track> trackSearchResult : resultList) {
-            assertSame("search", Track.class, trackSearchResult.getType());
+            assertSame(Track.class, trackSearchResult.getType(), "search");
         }
     }
 }
